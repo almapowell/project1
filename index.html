@@ -1,12 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sage Window Cleaning — Hamilton, Montana</title>
+  <meta name="description" content="Streak-free residential and commercial window cleaning in Hamilton, Montana and the Bitterroot Valley. Call Sage Window Cleaning at (406) 381-2496 for a free quote.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2396A47C'/%3E%3Crect x='28' y='28' width='20' height='20' fill='%23171A12'/%3E%3Crect x='52' y='28' width='20' height='20' fill='%23171A12'/%3E%3Crect x='28' y='52' width='20' height='20' fill='%23171A12'/%3E%3Crect x='52' y='52' width='20' height='20' fill='%23171A12'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --sage: #96A47C;
+      --sage-deep: #7C8B62;
+      --sage-mist: #E4E8D9;
+      --olive: #4E5A35;
+      --ink: #171A12;
+      --ink-soft: #3A4030;
+      --cream: #F6F4EC;
+      --paper: #FCFBF7;
+      --line: rgba(23, 26, 18, 0.12);
+      --radius: 20px;
+      --shadow: 0 18px 50px -24px rgba(23, 26, 18, 0.35);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .wordmark { font-family: "Sora", "Inter", sans-serif; }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-solid { background: var(--ink); color: var(--cream); box-shadow: var(--shadow); }
+    .btn-solid:hover { background: var(--olive); }
+    .btn-outline { border: 1.5px solid var(--line); background: transparent; }
+    .btn-outline:hover { border-color: var(--ink); }
+    .btn-cream { background: var(--cream); color: var(--ink); }
+    .btn-cream:hover { background: #fff; }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(252, 251, 247, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand svg { width: 44px; height: 44px; }
+    .wordmark { line-height: 1.05; }
+    .wordmark .top { font-weight: 800; font-size: 19px; letter-spacing: 0.14em; }
+    .wordmark .bottom { font-weight: 600; font-size: 9.5px; letter-spacing: 0.28em; color: var(--olive); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; font-weight: 500; font-size: 15px; }
+    .nav-links a { opacity: 0.75; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; }
+    .nav .btn { padding: 11px 22px; font-size: 14.5px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; border-radius: 2px; transition: 0.25s; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 72px 0 88px; overflow: hidden; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 22px;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--sage); border-radius: 2px; }
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .accent { color: var(--sage-deep); }
+    .hero p.lede {
+      margin: 24px 0 36px;
+      font-size: 18.5px;
+      color: var(--ink-soft);
+      max-width: 46ch;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .hero-note { margin-top: 22px; font-size: 14px; color: var(--ink-soft); opacity: 0.8; }
+
+    .hero-visual {
+      position: relative;
+      background: var(--sage);
+      border-radius: 32px;
+      padding: 48px 36px;
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+    }
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1.5px solid rgba(252, 251, 247, 0.35);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+    .hero-visual svg { width: min(320px, 80%); }
+
+    /* ---------- Marquee band ---------- */
+    .band {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+    .band-track {
+      display: flex;
+      gap: 48px;
+      width: max-content;
+      animation: scroll 28s linear infinite;
+      font-family: "Sora", sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .band-track span { display: flex; align-items: center; gap: 48px; }
+    .band-track .dot { color: var(--sage); }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* ---------- Sections ---------- */
+    section { padding: 96px 0; }
+    .section-head { max-width: 60ch; margin-bottom: 56px; }
+    .section-head h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 10px 0 16px;
+    }
+    .section-head p { color: var(--ink-soft); font-size: 17px; }
+
+    /* ---------- Services ---------- */
+    .services { background: var(--cream); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--sage-mist);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    .card .icon svg { width: 26px; height: 26px; stroke: var(--olive); }
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .card p { font-size: 14.5px; color: var(--ink-soft); }
+
+    /* ---------- Process ---------- */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .step {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 34px 28px 30px;
+      background: var(--paper);
+    }
+    .step .num {
+      font-family: "Sora", sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--paper);
+      background: var(--sage-deep);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    .step h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+    .step p { font-size: 15px; color: var(--ink-soft); }
+
+    /* ---------- Gallery ---------- */
+    .gallery { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .gallery-grid figure {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      box-shadow: 0 10px 30px -18px rgba(23, 26, 18, 0.4);
+    }
+    .gallery-grid figure svg { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-grid figure img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-grid figcaption {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: rgba(23, 26, 18, 0.78);
+      color: var(--cream);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ---------- About ---------- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-badge {
+      background: var(--sage);
+      border-radius: 32px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .about-badge::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1.5px solid rgba(252, 251, 247, 0.35);
+      border-radius: 22px;
+    }
+    .about-badge svg { width: 62%; }
+    .checks { margin-top: 28px; display: grid; gap: 14px; }
+    .checks li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
+    .checks .tick {
+      flex: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--sage-mist);
+      color: var(--olive);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta { background: var(--ink); color: var(--cream); border-radius: 0; }
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .cta h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+    .cta p { margin-top: 18px; color: rgba(246, 244, 236, 0.75); font-size: 17px; max-width: 44ch; }
+    .cta .phone-big {
+      font-family: "Sora", sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 3.5vw, 40px);
+      letter-spacing: 0.01em;
+      color: var(--sage);
+      display: inline-block;
+      margin: 26px 0 8px;
+      transition: color 0.2s;
+    }
+    .cta .phone-big:hover { color: var(--sage-mist); }
+    .cta-panel {
+      background: rgba(246, 244, 236, 0.06);
+      border: 1px solid rgba(246, 244, 236, 0.14);
+      border-radius: var(--radius);
+      padding: 34px 30px;
+    }
+    .cta-panel h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 18px; }
+    .area-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .area-list li {
+      border: 1px solid rgba(246, 244, 236, 0.22);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 14px;
+    }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 44px 0; }
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .foot small { color: var(--ink-soft); font-size: 13.5px; }
+    .foot .brand svg { width: 36px; height: 36px; }
+    .foot .wordmark .top { font-size: 16px; }
+    .foot .wordmark .bottom { font-size: 8.5px; }
+    .foot-links { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+    .foot-links a { opacity: 0.7; }
+    .foot-links a:hover { opacity: 1; }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .hero-grid, .about-grid, .cta-inner { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 340px; order: -1; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-badge { max-width: 380px; margin-inline: auto; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 68px 0; }
+      .nav-links, .nav > .btn { display: none; }
+      .nav-toggle { display: block; }
+      .nav-open .nav-links {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0 16px;
+      }
+      .nav-open .nav-links a { padding: 12px 6%; }
+      .service-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .hero { padding: 44px 0 64px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .band-track { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
 </head>
 <body>
-    
+
+  <!-- ======= Reusable logo mark ======= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="logo-mark">
+        <!-- badge circle -->
+        <circle cx="60" cy="60" r="56" fill="#FCFBF7"/>
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#171A12" stroke-width="7"/>
+        <!-- window panes -->
+        <g fill="#171A12">
+          <rect x="34" y="30" width="23" height="23" rx="2"/>
+          <rect x="63" y="30" width="23" height="23" rx="2"/>
+          <rect x="34" y="59" width="23" height="23" rx="2"/>
+          <rect x="63" y="59" width="23" height="23" rx="2"/>
+        </g>
+        <!-- sparkle in top-right pane -->
+        <path d="M74.5 34 L76.8 40.2 L83 42.5 L76.8 44.8 L74.5 51 L72.2 44.8 L66 42.5 L72.2 40.2 Z" fill="#FCFBF7"/>
+        <!-- squeegee -->
+        <g transform="rotate(-38 72 78)">
+          <rect x="52" y="74" width="40" height="7" rx="2.5" fill="#171A12" stroke="#FCFBF7" stroke-width="2.5"/>
+          <rect x="66" y="81" width="12" height="24" rx="4" fill="#171A12" stroke="#FCFBF7" stroke-width="2.5"/>
+        </g>
+        <!-- leaf sprig -->
+        <g stroke="#5F7048" stroke-width="3.5" fill="#7C8B62">
+          <path d="M14 84 Q30 66 52 58" fill="none"/>
+          <path d="M18 76 q-9 -3 -10 -12 q10 1 10 12z"/>
+          <path d="M27 68 q-9 -4 -9 -13 q10 2 9 13z"/>
+          <path d="M38 62 q-8 -6 -6 -15 q9 4 6 15z"/>
+          <path d="M22 88 q-2 9 -12 11 q1 -10 12 -11z"/>
+          <path d="M33 81 q-1 10 -11 12 q0 -10 11 -12z"/>
+          <path d="M44 74 q1 10 -8 14 q-2 -10 8 -14z"/>
+        </g>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ======= Header ======= -->
+  <header id="top">
+    <div class="container nav" id="nav">
+      <a class="brand" href="#top" aria-label="Sage Window Cleaning home">
+        <svg viewBox="0 0 120 120"><use href="#logo-mark"/></svg>
+        <span class="wordmark">
+          <span class="top">SAGE</span><br>
+          <span class="bottom">Window Cleaning</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-solid" href="tel:+14063812496">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (406) 381-2496
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======= Hero ======= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Hamilton, Montana</span>
+        <h1>Your windows are dirty.<br><span class="accent">Let us clean them.</span></h1>
+        <p class="lede">Sage Window Cleaning delivers a streak-free shine to homes and businesses across the Bitterroot Valley — so the only thing between you and the mountains is fresh air.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="tel:+14063812496">Call for a free quote</a>
+          <a class="btn btn-outline" href="#work">See our work</a>
+        </div>
+        <p class="hero-note">Locally owned &amp; operated · Serving the Bitterroot Valley</p>
+      </div>
+      <div class="hero-visual reveal">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Sage Window Cleaning logo"><use href="#logo-mark"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Marquee band ======= -->
+  <div class="band" aria-hidden="true">
+    <div class="band-track">
+      <span>Streak-free shine <i class="dot">◆</i> Residential &amp; commercial <i class="dot">◆</i> Hamilton, MT <i class="dot">◆</i> Free quotes <i class="dot">◆</i> Locally owned <i class="dot">◆</i></span>
+      <span>Streak-free shine <i class="dot">◆</i> Residential &amp; commercial <i class="dot">◆</i> Hamilton, MT <i class="dot">◆</i> Free quotes <i class="dot">◆</i> Locally owned <i class="dot">◆</i></span>
+    </div>
+  </div>
+
+  <!-- ======= Services ======= -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Every pane, spotless.</h2>
+        <p>From ranch houses to Main Street storefronts, we treat every job like it's our own front window.</p>
+      </div>
+      <div class="service-grid">
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="M12 4v16M4 12h16"/></svg></div>
+          <h3>Residential Windows</h3>
+          <p>Interior and exterior cleaning that brings the Bitterroot views back into your living room.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2m2 0h2M9 13h2m2 0h2M9 17h2m2 0h2"/></svg></div>
+          <h3>Commercial &amp; Storefront</h3>
+          <p>Sparkling glass that makes a first impression — with flexible scheduling around your business hours.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7 7l10 10M17 7L7 17"/></svg></div>
+          <h3>Screens &amp; Tracks</h3>
+          <p>Screens washed and sills and tracks detailed, so the whole window looks brand new — not just the glass.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 3c3 4.5 6 7.7 6 11a6 6 0 1 1-12 0c0-3.3 3-6.5 6-11z"/></svg></div>
+          <h3>Hard Water Removal</h3>
+          <p>Mineral spots and sprinkler stains lifted from glass to restore true clarity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Process ======= -->
+  <section id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Three easy steps to a clearer view.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">1</span>
+          <h3>Call or text</h3>
+          <p>Reach us at <a href="tel:+14063812496"><strong>(406) 381-2496</strong></a> and tell us about your home or business. We'll get you a fast, free quote.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">2</span>
+          <h3>We clean</h3>
+          <p>We show up on time, work carefully around your property, and leave every pane streak-free.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">3</span>
+          <h3>You enjoy the view</h3>
+          <p>Crystal-clear glass, clean sills, and those Bitterroot mountains looking better than ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Gallery ======= -->
+  <!-- To use real job photos: replace each <svg> below with
+       <img src="images/your-photo.jpg" alt="describe the job"> -->
+  <section class="gallery" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Recent work</span>
+        <h2>Glass so clean it disappears.</h2>
+        <p>A few recent jobs around the valley. Follow us on Facebook to see more.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="reveal">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Clean windows reflecting blue sky and mountains">
+            <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FA8D9"/><stop offset="1" stop-color="#CFE0F0"/></linearGradient></defs>
+            <rect width="400" height="300" fill="#8B8578"/>
+            <rect x="30" y="40" width="340" height="220" fill="#4A4438"/>
+            <rect x="48" y="58" width="146" height="184" fill="url(#sky1)"/>
+            <rect x="206" y="58" width="146" height="184" fill="url(#sky1)"/>
+            <path d="M48 190 L90 150 L130 185 L165 155 L194 180 L194 242 L48 242 Z" fill="#5F7048" opacity="0.8"/>
+            <path d="M206 185 L250 148 L295 188 L330 160 L352 178 L352 242 L206 242 Z" fill="#5F7048" opacity="0.8"/>
+            <circle cx="150" cy="90" r="16" fill="#fff" opacity="0.85"/>
+            <circle cx="168" cy="96" r="12" fill="#fff" opacity="0.7"/>
+          </svg>
+          <figcaption>Picture windows · Hamilton</figcaption>
+        </figure>
+        <figure class="reveal">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sparkling storefront glass">
+            <defs><linearGradient id="sky2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9C4E4"/><stop offset="1" stop-color="#E8EFF6"/></linearGradient></defs>
+            <rect width="400" height="300" fill="#CFC9BB"/>
+            <rect x="0" y="0" width="400" height="60" fill="#4A4438"/>
+            <rect x="24" y="80" width="100" height="200" fill="url(#sky2)" stroke="#4A4438" stroke-width="6"/>
+            <rect x="150" y="80" width="100" height="200" fill="url(#sky2)" stroke="#4A4438" stroke-width="6"/>
+            <rect x="276" y="80" width="100" height="200" fill="url(#sky2)" stroke="#4A4438" stroke-width="6"/>
+            <path d="M40 120 L100 260" stroke="#fff" stroke-width="10" opacity="0.5" stroke-linecap="round"/>
+            <path d="M170 110 L226 250" stroke="#fff" stroke-width="8" opacity="0.4" stroke-linecap="round"/>
+          </svg>
+          <figcaption>Storefront · Main Street</figcaption>
+        </figure>
+        <figure class="reveal">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Window with mountain reflection at golden hour">
+            <defs><linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0C987"/><stop offset="0.5" stop-color="#D9A97F"/><stop offset="1" stop-color="#9BB0C9"/></linearGradient></defs>
+            <rect width="400" height="300" fill="#96A47C"/>
+            <rect x="50" y="35" width="300" height="230" fill="#3A3428"/>
+            <rect x="68" y="53" width="128" height="194" fill="url(#sky3)"/>
+            <rect x="204" y="53" width="128" height="194" fill="url(#sky3)"/>
+            <path d="M68 180 L110 130 L150 175 L196 140 L196 247 L68 247 Z" fill="#3F4A2E" opacity="0.85"/>
+            <path d="M204 170 L245 132 L290 178 L332 145 L332 247 L204 247 Z" fill="#3F4A2E" opacity="0.85"/>
+          </svg>
+          <figcaption>Golden hour · Bitterroot Valley</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= About ======= -->
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about-badge reveal">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Sage Window Cleaning logo"><use href="#logo-mark"/></svg>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">About Sage</span>
+        <h2 style="font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 10px 0 16px;">Hamilton born.<br>Detail obsessed.</h2>
+        <p style="color: var(--ink-soft); font-size: 17px;">Sage Window Cleaning is a locally owned company right here in Hamilton, Montana. We started with a simple idea: windows in a place this beautiful deserve to be spotless. No shortcuts, no streaks — just honest work and glass you can't tell is there.</p>
+        <ul class="checks">
+          <li><span class="tick">✓</span> Locally owned &amp; operated in the Bitterroot Valley</li>
+          <li><span class="tick">✓</span> Careful, respectful service around your home or business</li>
+          <li><span class="tick">✓</span> Streak-free finish on every pane, sill, and screen</li>
+          <li><span class="tick">✓</span> Fast, free quotes — just call or text</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CTA / Contact ======= -->
+  <section class="cta" id="contact">
+    <div class="container cta-inner">
+      <div class="reveal">
+        <span class="eyebrow" style="color: var(--sage);">Get a free quote</span>
+        <h2>Ready for a clearer view?</h2>
+        <p>Call or text today and we'll get you a fast, no-pressure quote for your home or business.</p>
+        <a class="phone-big" href="tel:+14063812496">(406) 381-2496</a>
+        <div style="margin-top: 22px;">
+          <a class="btn btn-cream" href="sms:+14063812496">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Text us instead
+          </a>
+        </div>
+      </div>
+      <div class="cta-panel reveal">
+        <h3>Proudly serving</h3>
+        <ul class="area-list">
+          <li>Hamilton</li>
+          <li>Corvallis</li>
+          <li>Victor</li>
+          <li>Stevensville</li>
+          <li>Darby</li>
+          <li>The Bitterroot Valley</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="container foot">
+      <a class="brand" href="#top">
+        <svg viewBox="0 0 120 120"><use href="#logo-mark"/></svg>
+        <span class="wordmark">
+          <span class="top">SAGE</span><br>
+          <span class="bottom">Window Cleaning</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="tel:+14063812496">(406) 381-2496</a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <small>© 2026 Sage Window Cleaning · Hamilton, Montana</small>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const nav = document.getElementById('nav');
+    const toggle = document.querySelector('.nav-toggle');
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('.nav-links a').forEach(a =>
+      a.addEventListener('click', () => nav.classList.remove('nav-open'))
+    );
+
+    // Scroll reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
