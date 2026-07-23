@@ -3,7 +3,16 @@
 A single-page website for Sage Window Cleaning in Hamilton, Montana.
 Everything lives in one file: `index.html` (no build step, no dependencies).
 
-## Preview it
+## Live site
+
+The site is deployed with GitHub Pages at:
+**https://almapowell.github.io/project1/**
+
+Pushing changes to the site files automatically redeploys via the workflow in
+`.github/workflows/deploy.yml` (it publishes the repo contents to the
+`gh-pages` branch, which Pages serves).
+
+## Preview it locally
 
 Just open `index.html` in a browser, or serve the folder with any static host
 (GitHub Pages, Netlify, Vercel, etc.).
